@@ -17,6 +17,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Running tests    
-      - run: pip install -r requirements.txt
-      - run: pytest tests/ -v -s
+      - name: Test with pytest
+          run: |
+            pytest
