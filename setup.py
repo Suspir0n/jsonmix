@@ -16,7 +16,7 @@ setup(
     license='MIT',
     install_requires=[],
     setup_requires=[],
-    tests_requires=['pytest==6.2.3'],
+    tests_requires=['pytest==6.2.4'],
     tests_suite=['tests'],
     author_email='evandrojunior1615@gmail.com',
     url='https://github.com/Suspir0n/jsonmix.git',
