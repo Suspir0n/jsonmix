@@ -74,7 +74,7 @@ def test_validate_json_invalid():
     message_two = validate_two_field_simple_invalid()
     assert verification_condition((type(message_two) != dict)) is False
 
-    @validate_fields(receive_json=example_two_json_receive_invalid, model_json=example_json_model_valid,
+    @validate_fields(receive_json=example_three_json_receive_invalid, model_json=example_json_model_valid,
                      response_json=example_json_custom_error_response)
     def validate_three_field_simple_invalid():
         message = 'Olá Mundo'
@@ -82,7 +82,7 @@ def test_validate_json_invalid():
     message_three = validate_three_field_simple_invalid()
     assert verification_condition((type(message_three) != dict)) is False
 
-    @validate_fields(receive_json=example_two_json_receive_invalid, model_json=example_json_model_valid,
+    @validate_fields(receive_json=example_strong_json_receive_invalid, model_json=example_strong_json_model_invalid,
                      response_json=example_json_custom_error_response)
     def validate_field_strong_invalid():
         message = 'Olá Mundo'
