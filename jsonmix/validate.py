@@ -9,7 +9,7 @@ def validate_fields(receive_json=dict, model_json=dict, response_json=dict) -> d
             for key in receive_json.keys():
                 if isinstance(receive_json[key], dict):
                     for i in receive_json[key].keys():
-                        if receive_json[key][i] != model_json[key][i]:
+                        if i not in model_json[key]:
                             missing.append(i)
                 if key not in model_json:
                     missing.append(key)
