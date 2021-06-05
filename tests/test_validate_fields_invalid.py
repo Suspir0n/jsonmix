@@ -1,68 +1,24 @@
-from jsonmix.validate import validate_fields
-from datetime import datetime
+from jsonmix.validate import validate_json
+from examples_jsons.invalid_json import EJRI_001, EJRI_002, EJRI_003, ESJRI_001, EJMV_001, ESJMV_001, EJCERF_001
+
+# EJRI = example json receive invalid
+# EJMV = example json model valid
+# ESJRI = example strong json receive invalid
+# ESJMV = example strong json model valid
+# EJCERT = example json custom error response types
+# EJCERF = example json custom error response fields
 
 
-example_one_json_receive_invalid = {
-    'uid': '1',
-    'Na': 'Json Mix',
-    'Vesion': '0.1.0',
-    'message': 'A library for validate in python'
-}
-example_two_json_receive_invalid = {
-    'uid': '1',
-    'Name': 'Json Mix',
-    'Version': '0.1.0',
-    'message': 'A library for validate in python',
-    'add_field': 'test'
-}
-example_three_json_receive_invalid = {
-    'uid': '1',
-    'Name': 'Json Mix',
-    'add_field': 'test',
-    'Version': '0.1.0',
-    'message': 'A library for validate in python'
-}
-example_json_model_valid = {
-    'uid': int,
-    'Name': str,
-    'Version': str,
-    'message': str
-}
-example_json_custom_error_response = {
-    "code": "BSERR-001",
-    "data": {
-        "error": "inconsistency on JSON structure",
-        "message": "Missing required JSON field",
-    },
-    "date": str(datetime.now().timestamp()),
-}
-
-
-
-def test_validate_json_invalid():
-    @validate_fields(receive_json=example_one_json_receive_invalid, model_json=example_json_model_valid,
-                     response_json=example_json_custom_error_response)
-    def validate_one_field_simple_invalid():
-        message = 'Olá Mundo'
-        return message
-    message_one = validate_one_field_simple_invalid()
-    assert verification_condition((type(message_one) != dict)) is False
-
-    @validate_fields(receive_json=example_two_json_receive_invalid, model_json=example_json_model_valid,
-                     response_json=example_json_custom_error_response)
-    def validate_two_field_simple_invalid():
-        message = 'Olá Mundo'
-        return message
-    message_two = validate_two_field_simple_invalid()
-    assert verification_condition((type(message_two) != dict)) is False
-
-    @validate_fields(receive_json=example_two_json_receive_invalid, model_json=example_json_model_valid,
-                     response_json=example_json_custom_error_response)
-    def validate_three_field_simple_invalid():
-        message = 'Olá Mundo'
-        return message
-    message_three = validate_three_field_simple_invalid()
-    assert verification_condition((type(message_three) != dict)) is False
+def test_validate_fields_invalid():
+    sort = dict
+    got = [
+        type(validate_json(receive=EJRI_001, model=EJMV_001, response_field=EJCERF_001, operation='fields')),
+        type(validate_json(receive=EJRI_002, model=EJMV_001, response_field=EJCERF_001, operation='fields')),
+        type(validate_json(receive=EJRI_003, model=EJMV_001, response_field=EJCERF_001, operation='fields')),
+        type(validate_json(receive=ESJRI_001, model=ESJMV_001, response_field=EJCERF_001, operation='fields'))
+    ]
+    for item in got:
+        assert verification_condition((item != sort)) is False
 
 
 def verification_condition(condition):
