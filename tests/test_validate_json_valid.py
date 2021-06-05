@@ -1,72 +1,28 @@
 from jsonmix.validate import validate_json
-from datetime import datetime
+from examples_jsons.valid_json import EJMV_001, EJRV_001, ESJMV_001, ESJRV_001, EJCERF_001, EJCERT_001
 
-
-example_json_receive_valid = {
-    'uid': 1,
-    'Name': 'Json Mix',
-    'Version': '0.1.0',
-    'message': 'A library for validate in python'
-}
-example_json_model_valid = {
-    'uid': int,
-    'Name': str,
-    'Version': str,
-    'message': str
-}
-example_strong_json_receive_valid = {
-    'uid': 1,
-    'data': {
-        'Name': 'Json Mix',
-        'Version': '0.1.0',
-        'message': 'A library for validate in python'
-    },
-    'date': str(datetime.now().timestamp())
-}
-example_strong_json_model_valid = {
-    'uid': int,
-    'data': {
-        'Name': str,
-        'Version': str,
-        'message': str
-    },
-    'date': str
-}
-example_json_custom_error_response_field = {
-    "code": "JMERR-001",
-    "data": {
-        "error": "inconsistency on JSON structure",
-        "message": "Missing required JSON field"
-    },
-    "date": str(datetime.now().timestamp())
-}
-example_json_custom_error_response_field_type = {
-    "code": "JMERR-002",
-    "data": {
-        "error": "inconsistency on JSON structure",
-        "message": "JSON field type is incorrect"
-    },
-    "date": str(datetime.now().timestamp())
-}
-
+# EJRV = example json receive valid
+# EJMV = example json model valid
+# ESJRV = example strong json receive valid
+# ESJMV = example strong json model valid
+# EJCERT = example json custom error response types
+# EJCERF = example json custom error response fields
 
 
 def test_validate_json_valid():
-    @validate_json(receive_json=example_json_receive_valid, model_json=example_json_model_valid,
-                     response_json_field=example_json_custom_error_response_field, response_json_field_type=example_json_custom_error_response_field_type)
-    def validate_one_json_valid():
-        message = 'Olá Mundo'
-        return message
-    message_one = validate_one_json_valid()
-    assert verification_condition((type(message_one) != dict)) is True
+    sort = dict
+    got = [
+        type(validate_json(receive=EJRV_001, model=EJMV_001, response_field=EJCERF_001, response_field_type=EJCERT_001)),
+        type(validate_json(receive=ESJRV_001, model=ESJMV_001, response_field=EJCERF_001, response_field_type=EJCERT_001))
+    ]
+    for item in got:
+        assert verification_condition((item != sort)) is True
 
-    @validate_json(receive_json=example_strong_json_receive_valid, model_json=example_strong_json_model_valid,
-                     response_json_field=example_json_custom_error_response_field, response_json_field_type=example_json_custom_error_response_field_type)
-    def validate_json_strong_valid():
-        message = 'Olá Mundo'
-        return message
-    message_strong = validate_json_strong_valid()
-    assert verification_condition((type(message_strong) != dict)) is True
+    @validate_json(receive=EJRV_001, model=EJMV_001, response_field=EJCERF_001, response_field_type=EJCERT_001, operation='decorator')
+    def hello():
+        _message = 'hello word'
+        return _message
+    assert verification_condition(type(hello()) != sort) is True
 
 
 def verification_condition(condition):
