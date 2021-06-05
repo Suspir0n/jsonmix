@@ -22,6 +22,6 @@ setup(
     url='https://github.com/Suspir0n/jsonmix.git',
     download_url='#',
     python_requires='>=3.6',
-    maintainer='Evandro Silva',
-    maintainer_email='evandrojunior1615@gmail.com',
+    maintainer=['Evandro Silva', 'Ismael Carvalho'],
+    maintainer_email=['evandrojunior1615@gmail.com', 'ismael_profissional@hotmail.com'],
 )
