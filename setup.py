@@ -20,7 +20,7 @@ setup(
     tests_suite=['tests'],
     author_email='evandrojunior1615@gmail.com',
     url='https://github.com/Suspir0n/jsonmix.git',
-    download_url='#',
+    download_url='https://github.com/Suspir0n/jsonmix/archive/refs/tags/0.1.0.tar.gz',
     python_requires='>=3.6',
     maintainer=['Evandro Silva', 'Ismael Carvalho'],
     maintainer_email=['evandrojunior1615@gmail.com', 'ismael_profissional@hotmail.com'],

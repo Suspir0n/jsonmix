@@ -1,3 +1,10 @@
+[![Python Package](https://github.com/Suspir0n/jsonmix/actions/workflows/github-actions-demo.yml/badge.svg)](https://github.com/Suspir0n/jsonmix/actions/workflows/github-actions-demo.yml)
+[![PyPI version fury.io](https://badge.fury.io/py/jsonmix.svg)](https://pypi.python.org/pypi/jsonmix/)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/jsonmix.svg)](https://pypi.python.org/pypi/jsonmix/)
+[![GitHub license](https://img.shields.io/github/license/Suspir0n/jsonmix.svg)](https://github.com/Suspir0n/jsonmix/blob/main/LICENSE)
+[![GitHub tag](https://img.shields.io/github/tag/Suspir0n/jsonmix.svg)](https://github.com/Suspir0n/jsonmix/tags)
+
+
 # Json Mix
 
 A Python library for validate json. In this `0.1.0` version of jsonmix, it allows you to validate the json that you this awaiting.
